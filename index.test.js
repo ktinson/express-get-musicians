@@ -17,4 +17,23 @@ describe('./musicians endpoint', () => {
         const responseData = await JSON.parse(response.text)
         expect(response.statusCode).toBe(200)
     }) 
+    test('Testing musician endpoint/get id', async()=> {
+        const response = await request(app).get('/musicians/:id')
+        expect(response.statusCode).toBe(200)
+    }) 
+    test('Testing musician endpoint/put id', async()=> {
+        const response = await request(app).put('/musicians/:id')
+        const responseData = await JSON.parse(response.text)
+        expect(response.statusCode).toBe(200)
+    }) 
+    test('Testing musician endpoint/post', async()=> {
+        const response = await request(app).post('/musicians/')
+        const responseData = await JSON.parse(response.text)
+        expect(response.statusCode).toBe(200)
+    })
+    test('Testing musician endpoint/delete id', async()=> {
+        const response = await request(app).delete('/musicians/:id')
+        const responseData = await JSON.parse(response.text)
+        expect(response.statusCode).toBe(200)
+    })
 })
