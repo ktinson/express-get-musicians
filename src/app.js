@@ -2,19 +2,20 @@ const express = require("express");
 const app = express();
 const { Musician } = require("../models/index")
 const { db } = require("../db/connection")
+const router = require('../routes/musicians')
 
 const port = 3000;
 
 //TODO: Create a GET /musicians route to return all musicians 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use('/musicians', router)
 app.get('/musicians', async (req, res) => {
     let result = await Musician.findAll()
     res.json(result)
 })
 app.get('/musicians/:id', async (req, res) => {
-    let result = await Musician.findByPk(req.params.id)
-    res.json(result)
+    
 })
 
 app.post('/musicians/', async (req, res) => {
@@ -31,8 +32,6 @@ app.delete('/musicians/:id', async (req, res) => {
     let result = await Musician.destroy({where:{id:req.params.id}})
     res.json(result)
 })
-
-
 
 
 

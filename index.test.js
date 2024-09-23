@@ -8,13 +8,15 @@ const { db } = require('./db/connection');
 const { Musician } = require('./models/index')
 const app = require('./src/app');
 const seedMusician = require("./seedData");
+const router = require('./routes/musicians')
+
+app.use('/musicians', router)
 
 
 describe('./musicians endpoint', () => {
     // Write your tests here
     test('Testing musician endpoint/get', async()=> {
         const response = await request(app).get('/musicians')
-        const responseData = await JSON.parse(response.text)
         expect(response.statusCode).toBe(200)
     }) 
     test('Testing musician endpoint/get id', async()=> {
