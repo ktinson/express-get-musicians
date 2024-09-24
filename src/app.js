@@ -10,28 +10,28 @@ const port = 3000;
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use('/musicians', router)
-app.get('/musicians', async (req, res) => {
-    let result = await Musician.findAll()
-    res.json(result)
-})
-app.get('/musicians/:id', async (req, res) => {
+// app.get('/musicians', async (req, res) => {
+//     let result = await Musician.findAll()
+//     res.json(result)
+// })
+// app.get('/musicians/:id', async (req, res) => {
     
-})
+// })
 
-app.post('/musicians/', async (req, res) => {
-    let result = await Musician.create(req.body)
-    res.json(result)
-})
-app.put('/musicians/:id', async (req, res) => {
+// app.post('/musicians/', async (req, res) => {
+//     let result = await Musician.create(req.body)
+//     res.json(result)
+// })
+// app.put('/musicians/:id', async (req, res) => {
 
-    let result = await Musician.update(req.body,{where:{id :req.params.id}})
-    res.json(result)
-})
+//     let result = await Musician.update(req.body,{where:{id :req.params.id}})
+//     res.json(result)
+// })
 
-app.delete('/musicians/:id', async (req, res) => {
-    let result = await Musician.destroy({where:{id:req.params.id}})
-    res.json(result)
-})
+// app.delete('/musicians/:id', async (req, res) => {
+//     let result = await Musician.destroy({where:{id:req.params.id}})
+//     res.json(result)
+// })
 
 
 
