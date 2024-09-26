@@ -22,10 +22,19 @@ router.post('/',[
         let result = await Musician.create(req.body)
     res.json(result)
 }})
-router.put('/:id', async (req, res) =>{
+router.put('/:id',[
+    check("name").not().isEmpty().trim(),
+    check("name").isLength({min: 2, max: 20}),
+    check("instrument").not().isEmpty().trim()], async (req, res) =>{
+        const errors = validationResult(req);
+        // If there are any errors, return the errors in the response
+        if(!errors.isEmpty()){
+            res.json({error: errors.array()})
+        }
+        else {
     let result = await Musician.update(req.body,{where:{id :req.params.id}})
     res.json(result)
-})
+}})
 router.get('/:id', async (req, res) =>{
     let result = await Musician.findByPk(req.params.id)
     res.json(result)
