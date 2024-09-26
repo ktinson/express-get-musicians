@@ -10,6 +10,7 @@ router.get('/', async (req, res) =>{
 })
 router.post('/',[
     check("name").not().isEmpty().trim(),
+    check("name").isLength({min: 2, max: 20}),
     check("instrument").not().isEmpty().trim()], async (req, res) =>{
         const errors = validationResult(req);
         // If there are any errors, return the errors in the response
