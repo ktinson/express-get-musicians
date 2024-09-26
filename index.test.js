@@ -33,16 +33,33 @@ describe('./musicians endpoint', () => {
         const responseData = await JSON.parse(response.text)
         expect(response.statusCode).toBe(200)
     })
-    test('Testing musician endpoint/post error', async()=> {
+   
+    test('Testing musician endpoint/post length error', async()=> {
         const response = await request(app)
         .post("/musicians")
-    .send({ name: "", instrument: "ErrorInstrument" });
+    .send({ name: "a", instrument: "ErrorInstrument" });
   expect(response.statusCode).toBe(200);
   const responseData = JSON.parse(response.text);
   expect(responseData.error).toEqual([
         {
             type: "field",
-            value: "",
+            value: "a",
+            msg: "Invalid value",
+            path: "name",
+            location: "body"
+        },
+  ]);
+    })
+    test('Testing musician endpoint/post length error', async()=> {
+        const response = await request(app)
+        .put("/musicians/1")
+    .send({ name: "a", instrument: "ErrorInstrument" });
+  expect(response.statusCode).toBe(200);
+  const responseData = JSON.parse(response.text);
+  expect(responseData.error).toEqual([
+        {
+            type: "field",
+            value: "a",
             msg: "Invalid value",
             path: "name",
             location: "body"
